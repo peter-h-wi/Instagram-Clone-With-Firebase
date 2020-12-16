@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+}
+
+.postright {
+    position: sticky;
+    top: 120px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 293px;
+    width: 100%;
+}
+
+.postright_avatar {
+    padding: 7px;
+}
+
+.postright_account {
+    padding: 10px;
+
+}
+
+.postright_email {
+    color: gray;
+}
+
+
+.postright_switch {
+    color: lightskyblue;
+    margin-left: 50px;
+}

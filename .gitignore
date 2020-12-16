@@ -4,7 +4,11 @@
 /node_modules
 /.pnp
 .pnp.js
+.idea
+.eslintcache
+.firebaserc
 
+Instagram-Clone.iml
 # testing
 /coverage
 
