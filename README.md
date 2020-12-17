@@ -1,3 +1,10 @@
+This is a web app using JavaScript and React.js.
+You can try this app through this link.
+https://instagram-clone-6e8df.web.app
+
+Utilized: React, Google Firebase (Firestore), Material-UI
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
