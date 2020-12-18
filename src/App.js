@@ -9,6 +9,7 @@ import Input from "@material-ui/core/Input";
 import ImageUpload from "./ImageUpload";
 import InstagramEmbed from 'react-instagram-embed';
 import PostRight from "./PostRight";
+import FlipMove from "react-flip-move";
 
 function getModalStyle() {
   const top = 50;
@@ -36,7 +37,6 @@ const useStyles = makeStyles((theme) => ({
 function App() {
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
-
   const [posts, setPosts] = useState([]);
   const [open, setOpen] = useState(false);
   const [openSignIn, setOpenSignIn] = useState(false);
@@ -54,6 +54,14 @@ function App() {
         // user has logged in...
         console.log(authUser);
         setUser(authUser);
+
+        if (authUser.displayName) {
+          // don't update username
+        } else {
+          return authUser.updateProfile({
+            displayName: username,
+          });
+        }
       } else {
         // user has logged out...
         setUser(null);
@@ -84,11 +92,6 @@ function App() {
     event.preventDefault();
     auth
         .createUserWithEmailAndPassword(email, password)
-        .then((authUser) => {
-          return authUser.user.updateProfile({
-            displayName: username
-          })
-        })
         .catch((error) => alert(error.message))
 
     setOpen(false);
@@ -198,11 +201,19 @@ function App() {
 
       <div className="app_posts">
         <div className="app_postsLeft">
-          {
-            posts.map(({id, post}) => (
-                <Post key={id} postId={id} user={user} username={post.username} caption={post.caption} imageUrl={post.imageUrl}/>
-            ))
-          }
+          <FlipMove>
+            {
+              posts.map(({id, post}) => (
+                  <Post
+                      key={id}
+                      postId={id}
+                      user={user}
+                      username={post.username}
+                      caption={post.caption}
+                      imageUrl={post.imageUrl}/>
+              ))
+            }
+          </FlipMove>
         </div>
         <div className="app_postsRight">
           {user && (<PostRight username={user.displayName} email={user.email}/>)}
@@ -223,12 +234,13 @@ function App() {
           {/*/>*/}
         </div>
       </div>
-      {user?.displayName ? (
-          <ImageUpload username={user.displayName}/>
-      ) : (
-          <h3>Sorry you need to login to upload.</h3>
-      )}
-
+      <div className={"app_upload"}>
+        {user?.displayName ? (
+            <ImageUpload username={user.displayName}/>
+        ) : (
+            <h3>Sorry you need to login to upload.</h3>
+        )}
+      </div>
     </div>
   );
 }

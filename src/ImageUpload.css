@@ -10,4 +10,12 @@
 
 .imageupload_progress {
     width: 100%;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    border-top: 1px solid lightgray;
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
 }
